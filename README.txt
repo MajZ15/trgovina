@@ -14,3 +14,5 @@ Alias /netbeans/ "/home/ep/NetBeansProjects/"
 
 # Enako vsebino dodamo v konfiguracijo datoteko, ki v Apacheju določa strežbo 
 # datoteko po protokolu SSL (default-ssl.conf)
+
+Zaenkrat le izpiše vse artikle trgovine
