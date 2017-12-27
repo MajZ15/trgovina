@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `artikel` (
   `naziv` VARCHAR(45) NOT NULL,
   `slika` VARCHAR(45) NULL DEFAULT NULL,
   `cena` FLOAT(11) NOT NULL,
+  `kolicina` INT(11) NOT NULL,
   `prodajalec_idprodajalec` INT(11) NOT NULL,
   PRIMARY KEY (`idartikel`),
   INDEX `fk_artikel_prodajalec1_idx` (`prodajalec_idprodajalec` ASC),
@@ -64,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `narocilo` (
   `cena` FLOAT(11) NOT NULL,
   `prodajalec_idprodajalec` INT(11) NULL DEFAULT NULL,
   `stranka_idstranka` INT(11) NOT NULL,
+  `kolicina` INT(11) NOT NULL,
   `potrjeno` TINYINT(1) NOT NULL,
   `preklicano` TINYINT(1) NOT NULL,
   PRIMARY KEY (`idnarocilo`, `stranka_idstranka`),
@@ -125,6 +127,13 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+
+LOCK TABLES `stranka` WRITE;
+INSERT INTO `stranka` VALUES
+(1, 'Chuck', 'Norris', 'gmail@chuck.norris', 'geslojezapicke','051257231','Povsod',null ),
+(2, 'Milka', 'Krava', 'krava@milka.mu', 'muuuuuu','1462124','Pasnik v dolini 16',null ),
+(3, 'Majda', 'Pešec', 'fizka@majda.prešec', 'astelahkoprosimtiho','051123231','Subiceva 1',null);
+
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` VALUES 
@@ -136,6 +145,14 @@ INSERT INTO `prodajalec` VALUES
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
-(1, 'DVD', NULL, 15.08, 1),
-(2, 'Bluray', NULL, 19.99, 1),
-(3, 'Vino', NULL, 10.50, 1);
+(1, 'DVD', NULL, 15.08,7, 1),
+(2, 'Bluray', NULL, 19.99,10, 1),
+(3, 'Vino', NULL, 10.50,2, 1);
+
+LOCK TABLES `narocilo` WRITE;
+INSERT INTO `narocilo` VALUES
+(1, 100.00, 1,1,10,-1,-1),
+(2, 621.00, 1,2,21,-1,-1),
+(3, 0.99, 1,3,1,-1,-1);
+
+

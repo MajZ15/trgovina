@@ -3,8 +3,11 @@
 // enables sessions for the entire app
 session_start();
 
-require_once("controller/ArtikliController.php");
 require_once("controller/ArtikliRESTController.php");
+require_once("controller/ProdajalecRESTController.php");
+require_once("controller/StrankaRESTController.php");
+require_once("controller/AdminRESTController.php");
+require_once("controller/NarociloRESTController.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
 define("IMAGES_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/images/");
@@ -12,57 +15,94 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
-$urls = [
-    "/^artikli\/?(\d+)?$/" => function ($method, $id = null) {
-        if ($id == null) {
-            ArtikliController::index();
-        } else {
-            ArtikliController::get($id);
+$urls = [    
+    ##PRODAJALEC -> CHECKED ! ne dela POST v postmanu v windowsih
+    "/prodajalci\/(\d+)$/" => function ($method, $id = null) {        
+        switch ($method) {
+            case "PUT":
+                ProdajalecRESTController::edit($id);
+                break;
+            case "DELETE":
+                ProdajalecRESTController::delete($id);
+                break;
+            default: # GET
+                ProdajalecRESTController::get($id);
+                break;
         }
     },
-    "/^artikli\/add$/" => function ($method) {
-        if ($method == "POST") {
-            ArtikliController::add();
-        } else {
-            ArtikliController::addForm();
+    "/prodajalci$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                ProdajalecRESTController::add();
+                break;
+            default: # GET
+                ProdajalecRESTController::index();
+                break;
         }
     },
-    "/^artikli\/edit\/(\d+)$/" => function ($method, $id) {
-        if ($method == "POST") {
-            ArtikliController::edit($id);
-        } else {
-            ArtikliController::editForm($id);
+    ##STRANKA  -> CHECKED ! postman ?
+    "/stranke\/(\d+)$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "PUT":
+                StrankaRESTController::edit($id);
+                break;
+            case "DELETE":
+                StrankaRESTController::delete($id);
+                break;
+            default: # GET
+                StrankaRESTController::get($id);
+                break;
         }
     },
-    "/^artikli\/delete\/(\d+)$/" => function ($method, $id) {
-        if ($method == "POST") {
-            ArtikliController::delete($id);
+    "/stranke$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                StrankaRESTController::add();
+                break;
+            default: # GET
+                StrankaRESTController::index();
+                break;
         }
     },
-    "/^artikli\/(\d+)\/(foo|bar|baz)\/(\d+)$/" => function ($method, $id, $val, $num) {
-        // primer kako definirati funkcijo, ki vzame dodatne parametre
-        // http://localhost/netbeans/trgovina/artikli/1/foo/10
-        echo "$id, $val, $num";
+    ##Admin -> CHECKED ! postman ?
+    "/admini\/(\d+)$/" => function ($method, $id = null) {        
+        switch ($method) {
+            case "PUT":
+                AdminRESTController::edit($id);
+                break;
+            case "DELETE":
+                AdminRESTController::delete($id);
+                break;
+            default: # GET
+                AdminRESTController::get($id);
+                break;
+        }
     },
-    "/^$/" => function () {
-        ViewHelper::redirect(BASE_URL . "artikli");
+    "/admini$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                AdminRESTController::add();
+                break;
+            default: # GET
+                AdminRESTController::index();
+                break;
+        }
     },
-    # REST API
-    "/^api\/artikli\/(\d+)$/" => function ($method, $id = null) {
-        // TODO: izbris knjige z uporabo HTTP metode DELETE
+    ##AARTIKLI -> CHECKED ! postman ?
+    "/artikli\/(\d+)$/" => function ($method, $id = null) {        
         switch ($method) {
             case "PUT":
                 ArtikliRESTController::edit($id);
                 break;
             case "DELETE":
-                ArtikliRestController::delete($id);
+                ArtikliRESTController::delete($id);
                 break;
             default: # GET
                 ArtikliRESTController::get($id);
                 break;
         }
     },
-    "/^api\/artikli$/" => function ($method, $id = null) {
+    "/artikli$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
                 ArtikliRESTController::add();
@@ -71,7 +111,33 @@ $urls = [
                 ArtikliRESTController::index();
                 break;
         }
+    },    
+    ##NAROCIA -> CHECKED ! postman ?
+    "/narocila\/(\d+)$/" => function ($method, $id = null) {       
+        switch ($method) {
+            case "PUT":
+                NarociloRESTController::edit($id);
+                break;
+            case "DELETE":
+                NarociloRESTController::delete($id);
+                break;
+            default: # GET
+                NarociloRESTController::get($id);
+                break;
+        }
     },
+    "/narocila$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                NarociloRESTController::add();
+                break;
+            default: # GET
+                NarociloRESTController::index();
+                break;
+        }
+    }, 
+            
+    
 ];
 
 foreach ($urls as $pattern => $controller) {

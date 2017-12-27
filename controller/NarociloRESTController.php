@@ -1,14 +1,14 @@
 <?php
 
-require_once("model/ArtikelDB.php");
+require_once("model/NarociloDB.php");
 ##require_once("controller/BooksController.php");
 require_once("ViewHelper.php");
 
-class ArtikliRESTController {
+class NarociloRESTController {
     
     public static function get($id) {
         try {
-            echo ViewHelper::renderJSON(ArtikelDB::get(["id" => $id]));
+            echo ViewHelper::renderJSON(NarociloDB::get(["id" => $id]));
         } catch (InvalidArgumentException $e) {
             echo ViewHelper::renderJSON($e->getMessage(), 404);
         }
@@ -18,7 +18,7 @@ class ArtikliRESTController {
         ##$prefix = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"]
         ##        . $_SERVER["REQUEST_URI"] . "/";
         ##var_dump($prefix);
-        echo ViewHelper::renderJSON(ArtikelDB::getAll());
+        echo ViewHelper::renderJSON(NarociloDB::getAll());
     }
 
     public static function add() {
@@ -26,10 +26,11 @@ class ArtikliRESTController {
         parse_str(file_get_contents("php://input"), $_myPOST);
         $data = filter_var_array($_myPOST, self::getRules());
         
+        
         if (self::checkValues($data)) {
-            $id = ArtikelDB::insert($data);
+            $id = NarociloDB::insert($data);
             echo ViewHelper::renderJSON("", 201);
-            ViewHelper::redirect(BASE_URL . "artikel/$id");
+            ViewHelper::redirect(BASE_URL . "narocilo/$id");
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
         }
@@ -43,7 +44,7 @@ class ArtikliRESTController {
         if (self::checkValues($data)) {
             $data["id"] = $id;
             
-            ArtikelDB::update($data);
+            NarociloDB::update($data);
             echo ViewHelper::renderJSON("", 200);
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
@@ -55,7 +56,7 @@ class ArtikliRESTController {
         // Vrni kodo 200 v primeru uspeha
         // Vrni kodo 400 v primeru napake
         try {
-            ArtikelDB::delete(["id" => $id]);
+            NarociloDB::delete(["id" => $id]);
             echo ViewHelper::renderJSON("",200);
         } catch (Exception $e) {
             echo ViewHelper::renderJSON("Napaka: {$e->getMessage()})",400);
@@ -70,18 +71,22 @@ class ArtikliRESTController {
 
         $result = TRUE;
         foreach ($input as $value) {
-            $result = $result && $value != false;
+            
+            $result = $result && ($value != null);
+     
         }
-
+       
         return $result;
     }
    
     function getRules() {
         return [
-            'naziv' => FILTER_SANITIZE_SPECIAL_CHARS,
             'cena' => FILTER_VALIDATE_FLOAT,
             'prodajalec_idprodajalec' => FILTER_VALIDATE_INT,
+            'stranka_idstranka' => FILTER_VALIDATE_INT,
             'kolicina' => FILTER_VALIDATE_INT,
+            'potrjeno' => FILTER_VALIDATE_INT,
+            'preklicano' => FILTER_VALIDATE_INT,
         ];
     }
     

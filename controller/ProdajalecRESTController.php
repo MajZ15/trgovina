@@ -1,14 +1,13 @@
 <?php
 
-require_once("model/ArtikelDB.php");
-##require_once("controller/BooksController.php");
+require_once("model/ProdajalecDB.php");
 require_once("ViewHelper.php");
 
-class ArtikliRESTController {
+class ProdajalecRESTController {
     
     public static function get($id) {
         try {
-            echo ViewHelper::renderJSON(ArtikelDB::get(["id" => $id]));
+            echo ViewHelper::renderJSON(ProdajalecDB::get(["id" => $id]));
         } catch (InvalidArgumentException $e) {
             echo ViewHelper::renderJSON($e->getMessage(), 404);
         }
@@ -18,18 +17,19 @@ class ArtikliRESTController {
         ##$prefix = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"]
         ##        . $_SERVER["REQUEST_URI"] . "/";
         ##var_dump($prefix);
-        echo ViewHelper::renderJSON(ArtikelDB::getAll());
+        echo ViewHelper::renderJSON(ProdajalecDB::getAll());
     }
 
     public static function add() {
         $_myPOST = [];
         parse_str(file_get_contents("php://input"), $_myPOST);
         $data = filter_var_array($_myPOST, self::getRules());
-        
+        ##var_dump($data);
+        ##$this->getRules();
         if (self::checkValues($data)) {
-            $id = ArtikelDB::insert($data);
+            $id = ProdajalecDB::insert($data);
             echo ViewHelper::renderJSON("", 201);
-            ViewHelper::redirect(BASE_URL . "artikel/$id");
+            ViewHelper::redirect(BASE_URL . "prodajalec/$id");
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
         }
@@ -43,7 +43,7 @@ class ArtikliRESTController {
         if (self::checkValues($data)) {
             $data["id"] = $id;
             
-            ArtikelDB::update($data);
+            ProdajalecDB::update($data);
             echo ViewHelper::renderJSON("", 200);
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
@@ -55,7 +55,7 @@ class ArtikliRESTController {
         // Vrni kodo 200 v primeru uspeha
         // Vrni kodo 400 v primeru napake
         try {
-            ArtikelDB::delete(["id" => $id]);
+            ProdajalecDB::delete(["id" => $id]);
             echo ViewHelper::renderJSON("",200);
         } catch (Exception $e) {
             echo ViewHelper::renderJSON("Napaka: {$e->getMessage()})",400);
@@ -78,10 +78,11 @@ class ArtikliRESTController {
    
     function getRules() {
         return [
-            'naziv' => FILTER_SANITIZE_SPECIAL_CHARS,
-            'cena' => FILTER_VALIDATE_FLOAT,
-            'prodajalec_idprodajalec' => FILTER_VALIDATE_INT,
-            'kolicina' => FILTER_VALIDATE_INT,
+            'ime' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'priimek' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'email' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'geslo' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'admin_idadmin' => FILTER_VALIDATE_INT
         ];
     }
     

@@ -16,3 +16,18 @@ Alias /netbeans/ "/home/ep/NetBeansProjects/"
 # datoteko po protokolu SSL (default-ssl.conf)
 
 Zaenkrat le izpiše vse artikle trgovine
+
+
+UPDATE 28.12.2017 0:21
+
+Dodani so REST viri za:
+    - narocilo
+    - artikel
+    - admin
+    - stranka
+    - prodajalec 
+
+Testirani so vsi z Insomnio in delajo. 
+
+Posodobljena baza -> dodan atribut 'kolicina' k entiteti narocilo in artikel (?artikel_has_stranka?)
+? Narocilo nima podatka o tem, kateri artikel je narocen ? 
