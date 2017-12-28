@@ -28,7 +28,8 @@ Dodani so REST viri za:
     - prodajalec 
 
 Testirani so vsi z Insomnio in delajo.
-? Testiranje z postmanom iz windowsow je neuspešno pri metodah PUT in POST ? ("Missing data.") ? 
+
+? Testiranje z Postman iz Windows je neuspešno pri metodah PUT in POST ? ("Missing data.") ? 
 /*
 $_myPOST = [];
 parse_str(file_get_contents("php://input"), $_myPOST);
@@ -44,6 +45,9 @@ POST localhost/netbeans/trgovina/prodajalci
     "geslo" = "geslo",
     "admin_idadmin" = "1"
 }
+če je pa JSON v obliki
+ime=Janez&priimek=Novak&email=janez.novak@gmail.com&geslo=geslo&admin_idadmin=1
+Pa dela ? 
 */      
 
 Posodobljena baza -> dodan atribut 'kolicina' k entiteti narocilo in artikel (?artikel_has_stranka?)
