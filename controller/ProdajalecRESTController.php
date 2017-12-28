@@ -23,8 +23,11 @@ class ProdajalecRESTController {
     public static function add() {
         $_myPOST = [];
         parse_str(file_get_contents("php://input"), $_myPOST);
+        ##var_dump($_myPOST);
+        ##echo "-------------------------------";
         $data = filter_var_array($_myPOST, self::getRules());
         ##var_dump($data);
+        
         ##$this->getRules();
         if (self::checkValues($data)) {
             $id = ProdajalecDB::insert($data);
