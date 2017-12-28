@@ -3,11 +3,13 @@
 // enables sessions for the entire app
 session_start();
 
-require_once("controller/ArtikliRESTController.php");
+require_once("controller/ArtikelRESTController.php");
 require_once("controller/ProdajalecRESTController.php");
 require_once("controller/StrankaRESTController.php");
 require_once("controller/AdminRESTController.php");
 require_once("controller/NarociloRESTController.php");
+
+require_once("ViewHelper.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
 define("IMAGES_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/images/");
@@ -15,9 +17,14 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
-$urls = [    
+$urls = [
+    # HTTP router
+    "/^artikli\/?(\d+)?$/" => function ($method, $id = null) {
+        echo ViewHelper::render("view/artikel-list.php", []);
+    },
+    # API ROUTER
     ##PRODAJALEC -> CHECKED ! ne dela POST v postmanu v windowsih
-    "/prodajalci\/(\d+)$/" => function ($method, $id = null) {        
+    "/^api\/prodajalci\/(\d+)$/" => function ($method, $id = null) {        
         switch ($method) {
             case "PUT":
                 ProdajalecRESTController::edit($id);
@@ -30,7 +37,7 @@ $urls = [
                 break;
         }
     },
-    "/prodajalci$/" => function ($method, $id = null) {
+    "/^api\/prodajalci$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
                 ProdajalecRESTController::add();
@@ -41,7 +48,7 @@ $urls = [
         }
     },
     ##STRANKA  -> CHECKED ! postman ?
-    "/stranke\/(\d+)$/" => function ($method, $id = null) {
+    "/^api\/stranke\/(\d+)$/" => function ($method, $id = null) {
         switch ($method) {
             case "PUT":
                 StrankaRESTController::edit($id);
@@ -54,7 +61,7 @@ $urls = [
                 break;
         }
     },
-    "/stranke$/" => function ($method, $id = null) {
+    "/^api\/stranke$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
                 StrankaRESTController::add();
@@ -65,7 +72,7 @@ $urls = [
         }
     },
     ##Admin -> CHECKED ! postman ?
-    "/admini\/(\d+)$/" => function ($method, $id = null) {        
+    "/^api\/admini\/(\d+)$/" => function ($method, $id = null) {        
         switch ($method) {
             case "PUT":
                 AdminRESTController::edit($id);
@@ -78,7 +85,7 @@ $urls = [
                 break;
         }
     },
-    "/admini$/" => function ($method, $id = null) {
+    "/^api\/admini$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
                 AdminRESTController::add();
@@ -89,31 +96,31 @@ $urls = [
         }
     },
     ##AARTIKLI -> CHECKED ! postman ?
-    "/artikli\/(\d+)$/" => function ($method, $id = null) {        
+    "/^api\/artikli\/(\d+)$/" => function ($method, $id = null) {        
         switch ($method) {
             case "PUT":
-                ArtikliRESTController::edit($id);
+                ArtikelRESTController::edit($id);
                 break;
             case "DELETE":
-                ArtikliRESTController::delete($id);
+                ArtikelRESTController::delete($id);
                 break;
             default: # GET
-                ArtikliRESTController::get($id);
+                ArtikelRESTController::get($id);
                 break;
         }
     },
-    "/artikli$/" => function ($method, $id = null) {
+    "/^api\/artikli$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
-                ArtikliRESTController::add();
+                ArtikelRESTController::add();
                 break;
             default: # GET
-                ArtikliRESTController::index();
+                ArtikelRESTController::index();
                 break;
         }
     },    
     ##NAROCIA -> CHECKED ! postman ?
-    "/narocila\/(\d+)$/" => function ($method, $id = null) {       
+    "/^api\/narocila\/(\d+)$/" => function ($method, $id = null) {       
         switch ($method) {
             case "PUT":
                 NarociloRESTController::edit($id);
@@ -126,7 +133,7 @@ $urls = [
                 break;
         }
     },
-    "/narocila$/" => function ($method, $id = null) {
+    "/^api\/narocila$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
                 NarociloRESTController::add();
