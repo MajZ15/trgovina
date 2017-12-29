@@ -2,7 +2,8 @@
 
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
 <meta charset="UTF-8" />
-<title>Library</title>
+<title>Trgovina</title>
 
-<h1>Vsi artikli</h1>
+<h1>Trgovina</h1>
 
+<h2>Artikli</h2>

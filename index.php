@@ -3,6 +3,9 @@
 // enables sessions for the entire app
 session_start();
 
+require_once("controller/ArtikelController.php");
+require_once("controller/LoginController.php");
+
 require_once("controller/ArtikelRESTController.php");
 require_once("controller/ProdajalecRESTController.php");
 require_once("controller/StrankaRESTController.php");
@@ -19,8 +22,35 @@ $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
     # HTTP router
+    # Anonimni uporabnik view
     "/^artikli\/?(\d+)?$/" => function ($method, $id = null) {
-        echo ViewHelper::render("view/artikel-list.php", []);
+        if ($id == null) {
+            ArtikelController::index();
+        } else {
+            ArtikelController::get($id);
+        }
+    },
+    "/login$/" => function ($method, $id = null) {
+        if ($method == "POST") {
+            LoginController::login();
+        } else {
+            LoginController::loginForm();
+        }
+    },
+    # Admin view
+    "/admin$/" => function ($method) {
+        echo ViewHelper::render("view/admin/admin-home.php");
+    },
+    # Prodajalec view
+    "/prodajalec$/" => function ($method) {
+        echo ViewHelper::render("view/prodajalec/prodajalec-home.php");
+    },
+    # Stranka view
+    "/stranka$/" => function ($method) {
+        echo ViewHelper::render("view/stranka/stranka-home.php");
+    },
+    "/^$/" => function () {
+        ViewHelper::redirect(BASE_URL . "artikli");
     },
     # API ROUTER
     ##PRODAJALEC -> CHECKED ! ne dela POST v postmanu v windowsih
