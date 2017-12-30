@@ -3,18 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ep/NetBeansProjects/trgovina/sql/baza.sql</file>
-            <file>file:/home/ep/NetBeansProjects/trgovina/controller/ArtikliRESTController.php</file>
-            <file>file:/home/ep/NetBeansProjects/trgovina/controller/ArtikliController.php</file>
-            <file>file:/home/ep/NetBeansProjects/trgovina/index.php</file>
-            <file>file:/home/ep/NetBeansProjects/trgovina/view/artikel-list.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/controller/AdminRESTController.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/controller/ProdajalecRESTController.php</file>
             <file>file:/home/ep/NetBeansProjects/trgovina/ViewHelper.php</file>
             <file>file:/home/ep/NetBeansProjects/trgovina/static/css/style.css</file>
             <file>file:/home/ep/NetBeansProjects/trgovina/model/AbstractDB.php</file>
-            <file>file:/home/ep/NetBeansProjects/trgovina/model/DB.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/controller/NarociloRESTController.php</file>
             <file>file:/home/ep/NetBeansProjects/trgovina/model/ArtikelDB.php</file>
-            <file>file:/home/ep/NetBeansProjects/trgovina/README.txt</file>
             <file>file:/home/ep/NetBeansProjects/trgovina/.htaccess</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/sql/baza.sql</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/controller/ArtikliRESTController.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/controller/StrankaRESTController.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/index.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/view/artikel-list.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/model/DB.php</file>
+            <file>file:/home/ep/NetBeansProjects/trgovina/README.txt</file>
         </group>
     </open-files>
 </project-private>

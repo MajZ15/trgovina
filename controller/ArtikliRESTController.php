@@ -1,5 +1,5 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
 require_once("model/ArtikelDB.php");
 ##require_once("controller/BooksController.php");
 require_once("ViewHelper.php");

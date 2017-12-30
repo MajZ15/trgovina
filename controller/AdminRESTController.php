@@ -1,5 +1,5 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
 require_once("model/AdminDB.php");
 require_once("ViewHelper.php");
 
