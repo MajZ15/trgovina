@@ -4,7 +4,7 @@ require_once("model/ArtikelDB.php");
 ##require_once("controller/BooksController.php");
 require_once("ViewHelper.php");
 
-class ArtikliRESTController {
+class ArtikelRESTController {
     
     public static function get($id) {
         try {
