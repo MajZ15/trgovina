@@ -67,6 +67,16 @@ $urls = [
                 break;
         }
     },
+    "/^api\/prodajalci\/(\d+)\/artikli$/" => function ($method, $id = null) {        
+        switch ($method) {
+            case "POST":
+                ProdajalecRESTController::postArtikli();
+                break;
+            default: # GET
+                ProdajalecRESTController::getArtikli($id);
+                break;
+        }
+    },
     "/^api\/prodajalci$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":

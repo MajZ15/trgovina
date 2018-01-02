@@ -141,13 +141,28 @@ INSERT INTO `admin` VALUES
 
 LOCK TABLES `prodajalec` WRITE;
 INSERT INTO `prodajalec` VALUES
-(1, 'Prodajalec', 'Ena', 'prodajalec.ena@email.com', 'password', 1);
+(1, 'Prodajalec', 'Ena', 'prodajalec.ena@email.com', 'password', 1),
+(2, 'Prodajalec', 'Dva', 'prodajalec.dva@email.com', 'password', 1),
+(3, 'Prodajalec', 'Tri', 'prodajalec.tri@email.com', 'password', 1);
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
-(1, 'DVD', NULL, 15.08,7, 1),
-(2, 'Bluray', NULL, 19.99,10, 1),
-(3, 'Vino', NULL, 10.50,2, 1);
+(1, 'DVD', NULL, 3.99,10, 1),
+(2, 'Bluray', NULL, 5.99,10, 1),
+(3, 'CD', NULL, 2.99,10, 1);
+
+LOCK TABLES `artikel` WRITE;
+INSERT INTO `artikel` VALUES
+(4, 'Diablo 3', NULL, 39.99,7, 2),
+(5, 'Starcraft 2', NULL, 29.99,10, 2),
+(6, 'Heroes of the storm', NULL, 9.99,2, 2);
+
+LOCK TABLES `artikel` WRITE;
+INSERT INTO `artikel` VALUES
+(7, 'iPhone X', NULL, 999.99,3, 3),
+(8, 'iPhone 8 Plus', NULL, 799.99,4, 3),
+(9, 'iPhone 8', NULL, 699.99,5, 3);
+
 
 LOCK TABLES `narocilo` WRITE;
 INSERT INTO `narocilo` VALUES

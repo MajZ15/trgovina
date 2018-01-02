@@ -1,6 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 require_once("model/ProdajalecDB.php");
+require_once("model/ArtikelDB.php");
 require_once("ViewHelper.php");
 
 class ProdajalecRESTController {
@@ -18,6 +19,18 @@ class ProdajalecRESTController {
         ##        . $_SERVER["REQUEST_URI"] . "/";
         ##var_dump($prefix);
         echo ViewHelper::renderJSON(ProdajalecDB::getAll());
+    }
+    
+    public static function getArtikli($id){
+         try {
+            echo ViewHelper::renderJSON(ArtikelDB::pridobiArtikleProdajalca(["id" => $id]));
+        } catch (InvalidArgumentException $e) {
+            echo ViewHelper::renderJSON($e->getMessage(), 404);
+        }
+    }
+    
+     public static function postArtikli(){
+        #TODO
     }
 
     public static function add() {

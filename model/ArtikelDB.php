@@ -3,6 +3,12 @@
 require_once 'model/AbstractDB.php';
 
 class ArtikelDB extends AbstractDB {
+    public static function pridobiArtikleProdajalca($id){
+        return parent::query("SELECT *"
+                        . " FROM artikel"
+                        . " WHERE prodajalec_idprodajalec = :id",$id);
+
+    }
     
     public static function getAll() {
         return parent::query("SELECT idartikel, naziv, slika, cena, kolicina, prodajalec_idprodajalec"
