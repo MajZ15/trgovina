@@ -1,5 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
 require_once("model/StrankaDB.php");
 require_once("ViewHelper.php");
 
@@ -21,25 +24,34 @@ class StrankaRESTController {
     }
 
     public static function add() {
+        /*
         $_myPOST = [];
-        parse_str(file_get_contents("php://input"), $_myPOST);
-        $data = filter_var_array($_myPOST, self::getRules());
+        $json = file_get_contents("php://input");
+        $obj = json_decode($json,TRUE);
+        $id = StrankaDB::insert($obj);
+        echo ViewHelper::renderJSON("", 201);
+        ViewHelper::redirect(BASE_URL . "stranka/$id");
+        */
         
-        if (self::checkValues($data)) {
-            $id = StrankaDB::insert($data);
-            echo ViewHelper::renderJSON("", 201);
-            ViewHelper::redirect(BASE_URL . "stranka/$id");
-        } else {
-            echo ViewHelper::renderJSON("Missing data.", 400);
-        }
+        $json = file_get_contents("php://input");
+        $obj = json_decode($json,TRUE);
+        StrankaDB::insert($obj);
+        echo ViewHelper::renderJSON("", 200);
+        
+  
+        
     }
 
     public static function edit($id) {
         // spremenljivka $_PUT ne obstaja, zato jo moremo narediti sami
+       
         $_PUT = [];
-        parse_str(file_get_contents("php://input"), $_PUT);
-        $data = filter_var_array($_PUT, self::getRules());
-        
+        $json = file_get_contents("php://input");
+        $obj = json_decode($json,TRUE);
+        $obj['id'] = $id;
+        StrankaDB::update($obj);
+        echo ViewHelper::renderJSON("", 200);
+         /*
         if (self::checkValues($data)) {
             $data["id"] = $id;
             
@@ -48,6 +60,8 @@ class StrankaRESTController {
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
         }
+         * */
+         
     }
 
     public static function delete($id) {

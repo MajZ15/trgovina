@@ -1,5 +1,5 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
 // enables sessions for the entire app
 session_start();
 
@@ -90,7 +90,9 @@ $urls = [
     ##STRANKA  -> CHECKED ! postman ?
     "/^api\/stranke\/(\d+)$/" => function ($method, $id = null) {
         switch ($method) {
+            
             case "PUT":
+                
                 StrankaRESTController::edit($id);
                 break;
             case "DELETE":
@@ -202,4 +204,5 @@ foreach ($urls as $pattern => $controller) {
     }
 }
 
+echo("NEVEM");
 ViewHelper::displayError(new InvalidArgumentException("No controller matched."), true);

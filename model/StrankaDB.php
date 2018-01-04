@@ -28,6 +28,7 @@ class StrankaDB extends AbstractDB {
     }
     
     public static function insert(array $params) {
+       
         return parent::modify("INSERT INTO stranka (ime, priimek, email, geslo, telefon, naslov) "
                         . " VALUES (:ime, :priimek, :email, :geslo, :telefon, :naslov)", $params);
     }
