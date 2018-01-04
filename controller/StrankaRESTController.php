@@ -84,7 +84,7 @@ class StrankaRESTController {
             'geslo' => FILTER_SANITIZE_SPECIAL_CHARS,
             'telefon' => FILTER_SANITIZE_SPECIAL_CHARS,
             'naslov' => FILTER_SANITIZE_SPECIAL_CHARS,
-            
+            'aktiviran' => FILTER_SANITIZE_NUMBER_INT
         ];
     }
     

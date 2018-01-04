@@ -21,13 +21,6 @@ class ProdajalecRESTController {
         echo ViewHelper::renderJSON(ProdajalecDB::getAll());
     }
     
-    public static function getArtikli($id){
-         try {
-            echo ViewHelper::renderJSON(ArtikelDB::pridobiArtikleProdajalca(["id" => $id]));
-        } catch (InvalidArgumentException $e) {
-            echo ViewHelper::renderJSON($e->getMessage(), 404);
-        }
-    }
     
      public static function postArtikli(){
         #TODO
@@ -98,7 +91,7 @@ class ProdajalecRESTController {
             'priimek' => FILTER_SANITIZE_SPECIAL_CHARS,
             'email' => FILTER_SANITIZE_SPECIAL_CHARS,
             'geslo' => FILTER_SANITIZE_SPECIAL_CHARS,
-            'admin_idadmin' => FILTER_VALIDATE_INT
+            'aktiviran' => FILTER_VALIDATE_INT
         ];
     }
     

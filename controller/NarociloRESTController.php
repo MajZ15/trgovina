@@ -82,9 +82,7 @@ class NarociloRESTController {
     function getRules() {
         return [
             'cena' => FILTER_VALIDATE_FLOAT,
-            'prodajalec_idprodajalec' => FILTER_VALIDATE_INT,
             'stranka_idstranka' => FILTER_VALIDATE_INT,
-            'kolicina' => FILTER_VALIDATE_INT,
             'potrjeno' => FILTER_VALIDATE_INT,
             'preklicano' => FILTER_VALIDATE_INT,
         ];

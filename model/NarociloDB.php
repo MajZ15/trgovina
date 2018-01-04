@@ -31,13 +31,13 @@ class NarociloDB extends AbstractDB {
     }
     
     public static function insert(array $params) {
-        return parent::modify("INSERT INTO narocilo (cena, prodajalec_idprodajalec, stranka_idstranka, kolicina, potrjeno, preklicano) "
-                        . " VALUES (:cena, :prodajalec_idprodajalec, :stranka_idstranka, :kolicina, :potrjeno, :preklicano)", $params);
+        return parent::modify("INSERT INTO narocilo (cena, stranka_idstranka, potrjeno, preklicano) "
+                        . " VALUES (:cena, :stranka_idstranka, :potrjeno, :preklicano)", $params);
     }
     
     public static function update(array $params) {
-        return parent::modify("UPDATE narocilo SET prodajalec_idprodajalec = :prodajalec_idprodajalec, stranka_idstranka = :stranka_idstranka, "
-                        . "cena = :cena, kolicina = :kolicina, potrjeno = :potrjeno, preklicano = :preklicano"
+        return parent::modify("UPDATE narocilo SET"
+                        . "potrjeno = :potrjeno, preklicano = :preklicano"
                         . " WHERE idnarocilo = :id", $params);
     }
 

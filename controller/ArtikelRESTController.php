@@ -80,8 +80,8 @@ class ArtikelRESTController {
         return [
             'naziv' => FILTER_SANITIZE_SPECIAL_CHARS,
             'cena' => FILTER_VALIDATE_FLOAT,
-            'prodajalec_idprodajalec' => FILTER_VALIDATE_INT,
-            'kolicina' => FILTER_VALIDATE_INT,
+            'opis' => FILTER_VALIDATE_SPECIAL_CHARS,
+            'aktiviran' => FILTER_VALIDATE_INT,
         ];
     }
     

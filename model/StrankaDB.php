@@ -2,7 +2,7 @@
 class StrankaDB extends AbstractDB {
     
      public static function getAllwithURI(array $prefix) {
-        return parent::query("SELECT idstranka, ime, priimek, email, geslo, telefon, naslov, prodajalec_idprodajalec"
+        return parent::query("SELECT idstranka, ime, priimek, email, geslo, telefon, naslov, aktiviran"
                         . "          CONCAT(:prefix, idstranka) as uri "
                         . "FROM prodajalec "
                         . "ORDER BY idstranka ASC", $prefix);
@@ -34,7 +34,7 @@ class StrankaDB extends AbstractDB {
     
     public static function update(array $params) {
         return parent::modify("UPDATE stranka SET ime = :ime, priimek = :priimek, "
-                        . "email = :email, geslo = :geslo, telefon = :telefon, naslov = :naslov"
+                        . "email = :email, geslo = :geslo, telefon = :telefon, naslov = :naslov, aktiviran=:aktiviran"
                         . " WHERE idstranka = :id", $params);
     }
 

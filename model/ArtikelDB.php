@@ -3,21 +3,15 @@
 require_once 'model/AbstractDB.php';
 
 class ArtikelDB extends AbstractDB {
-    public static function pridobiArtikleProdajalca($id){
-        return parent::query("SELECT *"
-                        . " FROM artikel"
-                        . " WHERE prodajalec_idprodajalec = :id",$id);
-
-    }
     
     public static function getAll() {
-        return parent::query("SELECT idartikel, naziv, slika, cena, kolicina, prodajalec_idprodajalec"
+        return parent::query("SELECT idartikel, naziv, opis, cena, aktiviran"
                         . " FROM artikel"
                         . " ORDER BY idartikel ASC");
     }
     
     public static function getAllwithURI(array $prefix) {
-        return parent::query("SELECT idartikel, naziv, slika, cena, kolicina, prodajalec_idprodajalec, "
+        return parent::query("SELECT idartikel, naziv, opis, cena, aktiviran, "
                         . "          CONCAT(:prefix, idartikel) as uri "
                         . "FROM artikel "
                         . "ORDER BY idartikel ASC", $prefix);
@@ -38,13 +32,13 @@ class ArtikelDB extends AbstractDB {
     }
     
     public static function insert(array $params) {
-        return parent::modify("INSERT INTO artikel (naziv, cena, kolicina, prodajalec_idprodajalec) "
-                        . " VALUES (:naziv, :cena, :kolicina, :prodajalec_idprodajalec)", $params);
+        return parent::modify("INSERT INTO artikel (naziv, opis, cena, aktiviran) "
+                        . " VALUES (:naziv, :opis, :cena, :aktiviran)", $params);
     }
     
     public static function update(array $params) {
-        return parent::modify("UPDATE artikel SET naziv = :naziv, cena = :cena, kolicina = :kolicina, "
-                        . "prodajalec_idprodajalec = :prodajalec_idprodajalec"
+        return parent::modify("UPDATE artikel SET naziv = :naziv, opis = :opis, cena = :cena, "
+                        . "aktiviran = :aktiviran"
                         . " WHERE idartikel = :id", $params);
     }
 

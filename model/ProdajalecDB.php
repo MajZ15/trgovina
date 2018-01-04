@@ -5,7 +5,7 @@ require_once 'model/AbstractDB.php';
 class ProdajalecDB extends AbstractDB {
 
     public static function getAllwithURI(array $prefix) {
-        return parent::query("SELECT idprodajalec, ime, priimek, email, geslo, admin_idadmin "
+        return parent::query("SELECT idprodajalec, ime, priimek, email, geslo, aktiviran "
                         . "          CONCAT(:prefix, idprodajalec) as uri "
                         . "FROM prodajalec "
                         . "ORDER BY idprodajalec ASC", $prefix);
@@ -31,13 +31,13 @@ class ProdajalecDB extends AbstractDB {
     }
     
     public static function insert(array $params) {
-        return parent::modify("INSERT INTO prodajalec (ime, priimek, email, geslo, admin_idadmin) "
-                        . " VALUES (:ime, :priimek, :email, :geslo, :admin_idadmin)", $params);
+        return parent::modify("INSERT INTO prodajalec (ime, priimek, email, geslo, aktiviran) "
+                        . " VALUES (:ime, :priimek, :email, :geslo, :aktiviran)", $params);
     }
     
     public static function update(array $params) {
         return parent::modify("UPDATE prodajalec SET ime = :ime, priimek = :priimek, "
-                        . "email = :email, geslo = :geslo, admin_idadmin = :admin_idadmin"
+                        . "email = :email, geslo = :geslo, aktiviran = :aktiviran"
                         . " WHERE idprodajalec = :id", $params);
     }
 
