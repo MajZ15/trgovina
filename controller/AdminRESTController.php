@@ -1,5 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
 require_once("model/AdminDB.php");
 require_once("ViewHelper.php");
 
@@ -21,6 +24,7 @@ class AdminRESTController {
     }
 
     public static function add() {
+        /*
         $_myPOST = [];
         parse_str(file_get_contents("php://input"), $_myPOST);
         $data = filter_var_array($_myPOST, self::getRules());
@@ -33,10 +37,18 @@ class AdminRESTController {
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
         }
+         * 
+         */
+             
+        $json = file_get_contents("php://input");
+        $obj = json_decode($json,TRUE);
+        AdminDB::insert($obj);
+        echo ViewHelper::renderJSON("", 200);
     }
 
     public static function edit($id) {
         // spremenljivka $_PUT ne obstaja, zato jo moremo narediti sami
+        /*
         $_PUT = [];
         parse_str(file_get_contents("php://input"), $_PUT);
         $data = filter_var_array($_PUT, self::getRules());
@@ -49,6 +61,14 @@ class AdminRESTController {
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
         }
+         * 
+         */
+             
+        $json = file_get_contents("php://input");
+        $obj = json_decode($json,TRUE);
+        $obj['id'] = $id;
+        AdminDB::update($obj);
+        echo ViewHelper::renderJSON("", 200);
     }
 
     public static function delete($id) {

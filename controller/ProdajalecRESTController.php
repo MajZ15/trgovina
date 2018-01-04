@@ -1,5 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
 require_once("model/ProdajalecDB.php");
 require_once("model/ArtikelDB.php");
 require_once("ViewHelper.php");
@@ -27,6 +30,7 @@ class ProdajalecRESTController {
     }
 
     public static function add() {
+        /*
         $_myPOST = [];
         parse_str(file_get_contents("php://input"), $_myPOST);
         ##var_dump($_myPOST);
@@ -42,10 +46,17 @@ class ProdajalecRESTController {
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
         }
+        */
+
+        $json = file_get_contents("php://input");
+        $obj = json_decode($json,TRUE);
+        ProdajalecDB::insert($obj);
+        echo ViewHelper::renderJSON("", 200);
     }
 
     public static function edit($id) {
         // spremenljivka $_PUT ne obstaja, zato jo moremo narediti sami
+        /*
         $_PUT = [];
         parse_str(file_get_contents("php://input"), $_PUT);
         $data = filter_var_array($_PUT, self::getRules());
@@ -57,6 +68,12 @@ class ProdajalecRESTController {
         } else {
             echo ViewHelper::renderJSON("Missing data.", 400);
         }
+        */
+        $json = file_get_contents("php://input");
+        $obj = json_decode($json,TRUE);
+        $obj['id'] = $id;
+        ProdajalecDB::update($obj);
+        echo ViewHelper::renderJSON("", 200);
     }
 
     public static function delete($id) {
