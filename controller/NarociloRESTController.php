@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
-##require_once("controller/BooksController.php");
+require_once("model/NarociloDB.php");
 require_once("ViewHelper.php");
 
 class NarociloRESTController {
