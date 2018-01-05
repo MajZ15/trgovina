@@ -23,6 +23,10 @@ class ArtikelRESTController {
         ##var_dump($prefix);
         echo ViewHelper::renderJSON(ArtikelDB::getAll());
     }
+    
+    public static function strankaIndex() {
+        echo ViewHelper::renderJSON(ArtikelDB::getActivated());
+    }
 
     public static function add() {
         /*

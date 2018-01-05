@@ -126,7 +126,14 @@ $urls = [
                 ArtikelRESTController::index();
                 break;
         }
-    },    
+    },
+    "/^api\/artikli\/aktivirani$/" => function ($method, $id = null) {
+        switch ($method) {
+            default: # GET
+                ArtikelRESTController::strankaIndex();
+                break;
+        }
+    },
     ##NAROCIA -> CHECKED ! postman ?
     "/^api\/narocila\/(\d+)$/" => function ($method, $id = null) {       
         switch ($method) {

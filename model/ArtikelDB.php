@@ -17,7 +17,14 @@ class ArtikelDB extends AbstractDB {
                         . "ORDER BY idartikel ASC", $prefix);
     }
     
-  
+    public static function getActivated() {
+        return parent::query("SELECT idartikel, naziv, opis, cena, aktiviran"
+                        . " FROM artikel WHERE aktiviran = 1"
+                        . " ORDER BY idartikel ASC");
+    }
+
+
+    
     public static function get(array $id) {
         $x = $id["id"];
         $artikli =  parent::query("SELECT *"
