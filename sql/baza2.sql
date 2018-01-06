@@ -140,21 +140,21 @@ INSERT INTO `prodajalec` VALUES
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
-(1, 'DVD', NULL, 3.99, true),
-(2, 'Bluray', NULL, 5.99, true),
-(3, 'CD', NULL, 2.99, true);
+(1, 'DVD', 'Opis artikla', 3.99, 1),
+(2, 'Bluray', 'Opis artikla', 5.99, 1),
+(3, 'CD', 'Opis artikla', 2.99, 1);
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
-(4, 'Diablo 3', NULL, 39.99, false),
-(5, 'Starcraft 2', NULL, 29.99, false),
-(6, 'Heroes of the storm', NULL, 9.99, false);
+(4, 'Diablo 3', 'Opis artikla', 39.99, 0),
+(5, 'Starcraft 2', 'Opis artikla', 29.99, 0),
+(6, 'Heroes of the storm', 'Opis artikla', 9.99, 0);
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
-(7, 'iPhone X', NULL, 999.99, true),
-(8, 'iPhone 8 Plus', NULL, 799.99, false),
-(9, 'iPhone 8', NULL, 699.99, false);
+(7, 'iPhone X', 'Opis artikla', 999.99, 1),
+(8, 'iPhone 8 Plus', 'Opis artikla', 799.99, 0),
+(9, 'iPhone 8', 'Opis artikla', 699.99, 0);
 
 
 LOCK TABLES `narocilo` WRITE;
