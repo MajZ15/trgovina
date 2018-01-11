@@ -11,8 +11,11 @@ class LoginRESTController {
     public static function login() {
         $json = file_get_contents("php://input");
         $obj = json_decode($json,TRUE);
-        
-        echo ViewHelper::renderJSON(LoginDB::get($obj));
+        try {
+            echo ViewHelper::renderJSON(LoginDB::get($obj));
+        } catch (Exception $e) {
+            echo ViewHelper::renderJSON("Napaka: {$e->getMessage()})",400);
+        }
     }
     
     function getRules() {

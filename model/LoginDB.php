@@ -2,7 +2,7 @@
 class LoginDB extends AbstractDB {
     public static function get(array $params) {
         $email = $params["email"];
-        $password = $params["password"];
+        $password = $params["geslo"];
 
         $stranke =  parent::query("SELECT idstranka, ime, priimek, email, telefon, naslov, aktiviran"
                         . " FROM stranka"
@@ -22,7 +22,6 @@ class LoginDB extends AbstractDB {
                 $stranke[0]["tip"] = 1;
                 return $stranke[0];
             } else {
-                var_dump("buuu");
                 throw new InvalidArgumentException("Napacno geslo!");
             }
         } else if (count($prodajalci) == 1)  {
@@ -40,7 +39,7 @@ class LoginDB extends AbstractDB {
                         . " FROM admin"
                         . " WHERE  email = :email", $params);
             if (password_verify($password, $hash[0]["geslo"])) {
-                $admini[0]["tip"] = 1;
+                $admini[0]["tip"] = 2;
                 return $admini[0];
             } else {
                 throw new InvalidArgumentException("Napacno geslo!");
