@@ -8,6 +8,7 @@ require_once("controller/ProdajalecRESTController.php");
 require_once("controller/StrankaRESTController.php");
 require_once("controller/AdminRESTController.php");
 require_once("controller/NarociloRESTController.php");
+require_once("controller/LoginRESTController.php");
 
 require_once("ViewHelper.php");
 
@@ -158,8 +159,16 @@ $urls = [
                 break;
         }
     }, 
-            
-    
+    ##Login -> CHECKED ! postman ?        
+    "/^api\/login$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                LoginRESTController::login();
+                break;
+            default: # GET
+                break;
+        }
+    },
 ];
 
 foreach ($urls as $pattern => $controller) {

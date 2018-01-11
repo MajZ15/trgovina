@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `ime` VARCHAR(45) NOT NULL,
   `priimek` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `geslo` VARCHAR(45) NOT NULL,
+  `geslo` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idadmin`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `prodajalec` (
   `ime` VARCHAR(45) NOT NULL,
   `priimek` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `geslo` VARCHAR(45) NOT NULL,
+  `geslo` VARCHAR(100) NOT NULL,
   `aktiviran` TINYINT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`idprodajalec`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `stranka` (
   `ime` VARCHAR(45) NOT NULL,
   `priimek` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `geslo` VARCHAR(45) NOT NULL,
+  `geslo` VARCHAR(100) NOT NULL,
   `telefon` INT(11) NULL DEFAULT NULL,
   `naslov` VARCHAR(45) CHARACTER SET 'big5' NULL DEFAULT NULL,
   `aktiviran` VARCHAR(45) NULL DEFAULT NULL,
@@ -123,20 +123,20 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 LOCK TABLES `stranka` WRITE;
 INSERT INTO `stranka` VALUES
-(1, 'Chuck', 'Norris', 'gmail@chuck.norris', 'geslojezapicke','051257231','Povsod',true ),
-(2, 'Milka', 'Krava', 'krava@milka.mu', 'muuuuuu','1462124','Pasnik v dolini 16',true ),
-(3, 'Majda', 'Pešec', 'fizka@majda.prešec', 'astelahkoprosimtiho','051123231','Subiceva 1',true);
+(1, 'Chuck', 'Norris', 'gmail@chuck.norris', '$2y$10$BWsl/xciUKjJVfDFQePgYucsg4/2iZW/2MccZgF4SYk0Tao47sqPO','051257231','Povsod',true ),
+(2, 'Milka', 'Krava', 'krava@milka.mu', '$2y$10$BWsl/xciUKjJVfDFQePgYucsg4/2iZW/2MccZgF4SYk0Tao47sqPO','1462124','Pasnik v dolini 16',true ),
+(3, 'Majda', 'Pešec', 'fizka@majda.prešec', '$2y$10$TP1ARBvEyZoMbdiwDFPN1.qP905dRASRag7PZyZygIFy6pi76IUBW','051123231','Subiceva 1',true);
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` VALUES 
-(1, 'Super', 'Administrator', 'super.administrator@email.com', 'password');
+(1, 'Super', 'Administrator', 'super.administrator@email.com', '$2y$10$PIgo6.KqtR/7gE8AsdJjGuBbVZNuLqsQv5WJmt8a/dvx8asKjdnay');
 
 LOCK TABLES `prodajalec` WRITE;
 INSERT INTO `prodajalec` VALUES
-(1, 'Prodajalec', 'Ena', 'prodajalec.ena@email.com', 'password', true),
-(2, 'Prodajalec', 'Dva', 'prodajalec.dva@email.com', 'password', true),
-(3, 'Prodajalec', 'Tri', 'prodajalec.tri@email.com', 'password', true);
+(1, 'Prodajalec', 'Ena', 'prodajalec.ena@email.com', '$2y$10$JDJ5JDEwJO25zOgn4rCSZOlvrzjgH52Qs5YPEiL4JhAO/0rdJnSzi', true),
+(2, 'Prodajalec', 'Dva', 'prodajalec.dva@email.com', '$2y$10$GtMM.z7HdbrzXGvkPraUru0Lf91BHZV0.Q4APTCP/ZoVO9V6vV3RW', true),
+(3, 'Prodajalec', 'Tri', 'prodajalec.tri@email.com', '$2y$10$QFlIxX8j3PlDGR7dd1TzDuiirUUxL5..2Kf/Rp4fa0qVtblXTCR.2', true);
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
