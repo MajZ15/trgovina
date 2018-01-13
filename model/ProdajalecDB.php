@@ -5,21 +5,21 @@ require_once 'model/AbstractDB.php';
 class ProdajalecDB extends AbstractDB {
 
     public static function getAllwithURI(array $prefix) {
-        return parent::query("SELECT idprodajalec, ime, priimek, email, geslo, aktiviran "
+        return parent::query("SELECT idprodajalec, ime, priimek, email, aktiviran "
                         . "          CONCAT(:prefix, idprodajalec) as uri "
                         . "FROM prodajalec "
                         . "ORDER BY idprodajalec ASC", $prefix);
     }
     
    public static function getAll() {
-        return parent::query("SELECT *"
+        return parent::query("SELECT idprodajalec, ime, priimek, email, aktiviran"
                         . " FROM prodajalec"
                         . " ORDER BY idprodajalec ASC");
     }
     
     public static function get(array $id) {
         $x = $id["id"];
-        $prodajalci =  parent::query("SELECT *"
+        $prodajalci =  parent::query("SELECT idprodajalec, ime, priimek, email, aktiviran"
                         . " FROM prodajalec"
                         . " WHERE  idprodajalec = $x");
         
@@ -31,11 +31,13 @@ class ProdajalecDB extends AbstractDB {
     }
     
     public static function insert(array $params) {
+        $params["geslo"] = password_hash($params["geslo"], PASSWORD_BCRYPT);
         return parent::modify("INSERT INTO prodajalec (ime, priimek, email, geslo, aktiviran) "
                         . " VALUES (:ime, :priimek, :email, :geslo, :aktiviran)", $params);
     }
     
     public static function update(array $params) {
+        $params["geslo"] = password_hash($params["geslo"], PASSWORD_BCRYPT);
         return parent::modify("UPDATE prodajalec SET ime = :ime, priimek = :priimek, "
                         . "email = :email, geslo = :geslo, aktiviran = :aktiviran"
                         . " WHERE idprodajalec = :id", $params);

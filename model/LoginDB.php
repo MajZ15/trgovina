@@ -19,7 +19,7 @@ class LoginDB extends AbstractDB {
                         . " FROM stranka"
                         . " WHERE  email = :email", $params);
             if (password_verify($password, $hash[0]["geslo"])) {
-                $stranke[0]["tip"] = 1;
+                $stranke[0]["tip"] = 0;
                 return $stranke[0];
             } else {
                 throw new InvalidArgumentException("Napacno geslo!");

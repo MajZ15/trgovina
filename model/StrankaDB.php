@@ -2,21 +2,21 @@
 class StrankaDB extends AbstractDB {
     
      public static function getAllwithURI(array $prefix) {
-        return parent::query("SELECT idstranka, ime, priimek, email, geslo, telefon, naslov, aktiviran"
+        return parent::query("SELECT idstranka, ime, priimek, email, telefon, naslov, aktiviran"
                         . "          CONCAT(:prefix, idstranka) as uri "
                         . "FROM prodajalec "
                         . "ORDER BY idstranka ASC", $prefix);
     }
     
    public static function getAll() {
-        return parent::query("SELECT *"
+        return parent::query("SELECT idstranka, ime, priimek, email, telefon, naslov, aktiviran"
                         . " FROM stranka"
                         . " ORDER BY idstranka ASC");
     }
     
     public static function get(array $id) {
         $x = $id["id"];
-        $stranke =  parent::query("SELECT *"
+        $stranke =  parent::query("SELECT idstranka, ime, priimek, email, telefon, naslov, aktiviran"
                         . " FROM stranka"
                         . " WHERE  idstranka = $x");
         
@@ -28,12 +28,13 @@ class StrankaDB extends AbstractDB {
     }
     
     public static function insert(array $params) {
-       
+       $params["geslo"] = password_hash($params["geslo"], PASSWORD_BCRYPT);
         return parent::modify("INSERT INTO stranka (ime, priimek, email, geslo, telefon, naslov) "
                         . " VALUES (:ime, :priimek, :email, :geslo, :telefon, :naslov)", $params);
     }
     
     public static function update(array $params) {
+        $params["geslo"] = password_hash($params["geslo"], PASSWORD_BCRYPT);
         return parent::modify("UPDATE stranka SET ime = :ime, priimek = :priimek, "
                         . "email = :email, geslo = :geslo, telefon = :telefon, naslov = :naslov, aktiviran=:aktiviran"
                         . " WHERE idstranka = :id", $params);
