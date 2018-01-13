@@ -29,8 +29,8 @@ class StrankaDB extends AbstractDB {
     
     public static function insert(array $params) {
        $params["geslo"] = password_hash($params["geslo"], PASSWORD_BCRYPT);
-        return parent::modify("INSERT INTO stranka (ime, priimek, email, geslo, telefon, naslov) "
-                        . " VALUES (:ime, :priimek, :email, :geslo, :telefon, :naslov)", $params);
+        return parent::modify("INSERT INTO stranka (ime, priimek, email, geslo, telefon, naslov, aktiviran) "
+                        . " VALUES (:ime, :priimek, :email, :geslo, :telefon, :naslov, :aktiviran)", $params);
     }
     
     public static function update(array $params) {
