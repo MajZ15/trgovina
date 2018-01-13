@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
+header("Content-Type: application/json, application/x-www-form-urlencoded");
 header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
 require_once("model/StrankaDB.php");
 require_once("ViewHelper.php");
@@ -41,16 +41,42 @@ class StrankaRESTController {
   
         
     }
+    public static function edit_android() {
+       // spremenljivka $_PUT ne obstaja, zato jo moremo narediti sami
+       
+       if(empty($_POST)){
+           $json = file_get_contents("php://input");
+           $obj = json_decode($json,TRUE);
+        } else {
+            $obj = $_POST;
+        }
+        StrankaDB::update($obj);
+        echo ViewHelper::renderJSON($obj, 200);
+         /*
+        if (self::checkValues($data)) {
+            $data["id"] = $id;
+            
+            StrankaDB::update($data);
+            echo ViewHelper::renderJSON("", 200);
+        } else {
+            echo ViewHelper::renderJSON("Missing data.", 400);
+        }
+         * */
+         
+    }
 
     public static function edit($id) {
-        // spremenljivka $_PUT ne obstaja, zato jo moremo narediti sami
+       // spremenljivka $_PUT ne obstaja, zato jo moremo narediti sami
        
-        $_PUT = [];
-        $json = file_get_contents("php://input");
-        $obj = json_decode($json,TRUE);
+       if(empty($_POST)){
+           $json = file_get_contents("php://input");
+           $obj = json_decode($json,TRUE);
+        } else {
+            $obj = $_POST;
+        }
         $obj['id'] = $id;
         StrankaDB::update($obj);
-        echo ViewHelper::renderJSON("", 200);
+        echo ViewHelper::renderJSON($obj, 200);
          /*
         if (self::checkValues($data)) {
             $data["id"] = $id;

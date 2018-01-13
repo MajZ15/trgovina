@@ -36,7 +36,7 @@ class StrankaDB extends AbstractDB {
     public static function update(array $params) {
         $params["geslo"] = password_hash($params["geslo"], PASSWORD_BCRYPT);
         return parent::modify("UPDATE stranka SET ime = :ime, priimek = :priimek, "
-                        . "email = :email, geslo = :geslo, telefon = :telefon, naslov = :naslov, aktiviran=:aktiviran"
+                        . "email = :email, geslo = :geslo, telefon = :telefon, naslov = :naslov, aktiviran = :aktiviran"
                         . " WHERE idstranka = :id", $params);
     }
 

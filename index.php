@@ -70,6 +70,27 @@ $urls = [
                 break;
         }
     },
+    "/^api\/stranke\/(\d+)\/posodobi$/" => function ($method, $id = null) {
+        switch ($method) {
+           
+            case "POST":
+                StrankaRESTController::edit($id);
+                break;
+            default: # GET
+                StrankaRESTController::get($id);
+                break;
+        }
+    },
+    "/^api\/posodobistranke$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                StrankaRESTController::edit_android();
+                break;
+            default: # GET
+                StrankaRESTController::get($id);
+                break;
+        }
+    },
     "/^api\/stranke$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
@@ -128,6 +149,7 @@ $urls = [
                 break;
         }
     },
+            
     "/^api\/artikli\/aktivirani$/" => function ($method, $id = null) {
         switch ($method) {
             default: # GET
