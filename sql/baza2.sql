@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `stranka` (
   `priimek` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `geslo` VARCHAR(100) NOT NULL,
-  `telefon` INT(11) NULL DEFAULT NULL,
+  `telefon` INT(15) NULL DEFAULT NULL,
   `naslov` VARCHAR(45) CHARACTER SET 'big5' NULL DEFAULT NULL,
   `aktiviran` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idstranka`),
