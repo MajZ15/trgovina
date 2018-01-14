@@ -9,6 +9,8 @@ require_once("controller/StrankaRESTController.php");
 require_once("controller/AdminRESTController.php");
 require_once("controller/NarociloRESTController.php");
 require_once("controller/LoginRESTController.php");
+require_once("controller/KosariceRESTController.php");
+require_once("controller/OceneRESTController.php");
 
 require_once("ViewHelper.php");
 
@@ -169,6 +171,54 @@ $urls = [
                 break;
         }
     },
+    ##KOSARICE -> CHECKED ! postman ?
+    "/^api\/kosarice\/(\d+)$/" => function ($method, $id = null) {       
+        switch ($method) {
+            case "PUT":
+                KosariceRESTController::edit($id);
+                break;
+            case "DELETE":
+                KosariceRESTController::delete($id);
+                break;
+            default: # GET
+                KosariceRESTController::get($id);
+                break;
+        }
+    },
+    "/^api\/kosarice$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                KosariceRESTController::add();
+                break;
+            default: # GET
+                KosariceRESTController::index();
+                break;
+        }
+    },
+            ##OCENE -> CHECKED ! postman ?
+    "/^api\/ocene\/(\d+)$/" => function ($method, $id = null) {       
+        switch ($method) {
+            case "PUT":
+                OceneRESTController::edit($id);
+                break;
+            case "DELETE":
+                OceneRESTController::delete($id);
+                break;
+            default: # GET
+                OceneRESTController::get($id);
+                break;
+        }
+    },
+    "/^api\/ocene$/" => function ($method, $id = null) {
+        switch ($method) {
+            case "POST":
+                OceneRESTController::add();
+                break;
+            default: # GET
+                OceneRESTController::index();
+                break;
+        }
+    }
 ];
 
 foreach ($urls as $pattern => $controller) {
