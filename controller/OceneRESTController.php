@@ -15,6 +15,14 @@ class OceneRESTController {
             echo ViewHelper::renderJSON($e->getMessage(), 404);
         }
     }
+    
+    public static function getAverage($id) {
+        try {
+            echo ViewHelper::renderJSON(OceneDB::getAverage(["id" => $id]));
+        } catch (InvalidArgumentException $e) {
+            echo ViewHelper::renderJSON($e->getMessage(), 404);
+        }
+    }
 
     public static function index() {
         ##$prefix = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"]

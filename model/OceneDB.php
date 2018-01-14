@@ -26,6 +26,15 @@ class OceneDB extends AbstractDB {
         return $ocene;
     }
     
+    public static function getAverage(array $id) {
+        $x = $id["id"];
+        $ocene =  parent::query("SELECT AVG(ocena) as 'average'"
+                        . " FROM ocene"
+                        . " WHERE idartikel_ocene = $x");
+        
+        return $ocene;
+    }
+    
     public static function insert(array $params) {
         return parent::modify("INSERT INTO ocene (idstranka_ocene, idartikel_ocene, ocena) "
                         . " VALUES (:idstranka, :idartikel, :ocena)", $params);

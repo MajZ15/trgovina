@@ -227,7 +227,7 @@ $urls = [
                 OceneRESTController::delete($id);
                 break;
             default: # GET
-                OceneRESTController::get($id);
+                OceneRESTController::getAverage($id);
                 break;
         }
     },
