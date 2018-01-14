@@ -9,8 +9,12 @@ require_once("ViewHelper.php");
 
 class LoginRESTController {
     public static function login() {
-        $json = file_get_contents("php://input");
-        $obj = json_decode($json,TRUE);
+        if(empty($_POST)){
+           $json = file_get_contents("php://input");
+           $obj = json_decode($json,TRUE);
+        } else {
+            $obj = $_POST;
+        }
         try {
             echo ViewHelper::renderJSON(LoginDB::get($obj));
         } catch (Exception $e) {
