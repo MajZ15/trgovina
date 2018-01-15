@@ -6,14 +6,15 @@ class LoginDB extends AbstractDB {
 
         $stranke =  parent::query("SELECT idstranka, ime, priimek, email, telefon, naslov, aktiviran"
                         . " FROM stranka"
-                        . " WHERE  email = :email", $params);
+                        . " WHERE  email = :email AND"
+                        . " aktiviran = 1", $params);
         $prodajalci =  parent::query("SELECT idprodajalec, ime, priimek, email, aktiviran"
                         . " FROM prodajalec"
-                        . " WHERE  email = :email", $params);
+                        . " WHERE  email = :email AND"
+                        . " aktiviran = 1", $params);
         $admini =  parent::query("SELECT idadmin, ime, priimek, email"
                         . " FROM admin"
                         . " WHERE  email = :email", $params);
-        
          if (count($stranke) == 1) {
             $hash =  parent::query("SELECT geslo"
                         . " FROM stranka"
@@ -46,7 +47,7 @@ class LoginDB extends AbstractDB {
             }
         }
         else {
-            throw new InvalidArgumentException("Napacna email in geslo!");
+            throw new InvalidArgumentException("Uporabnik ne obstaja!");
         }
     }
 

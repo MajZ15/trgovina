@@ -123,9 +123,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 LOCK TABLES `stranka` WRITE;
 INSERT INTO `stranka` VALUES
-(1, 'Chuck', 'Norris', 'gmail@chuck.norris', '$2y$10$BWsl/xciUKjJVfDFQePgYucsg4/2iZW/2MccZgF4SYk0Tao47sqPO','051257231','Povsod',true ),
-(2, 'Milka', 'Krava', 'krava@milka.mu', '$2y$10$BWsl/xciUKjJVfDFQePgYucsg4/2iZW/2MccZgF4SYk0Tao47sqPO','1462124','Pasnik v dolini 16',true ),
-(3, 'Majda', 'Pešec', 'fizka@majda.prešec', '$2y$10$TP1ARBvEyZoMbdiwDFPN1.qP905dRASRag7PZyZygIFy6pi76IUBW','051123231','Subiceva 1',true);
+(1, 'Chuck', 'Norris', 'gmail1', '$2y$10$BWsl/xciUKjJVfDFQePgYucsg4/2iZW/2MccZgF4SYk0Tao47sqPO','051257231','Svetovna 15',1),
+(2, 'Milka', 'Krava', 'gmail2', '$2y$10$BWsl/xciUKjJVfDFQePgYucsg4/2iZW/2MccZgF4SYk0Tao47sqPO','1462124','Pasnik v dolini 16',1),
+(3, 'Majda', 'Novak', 'gmail3', '$2y$10$TP1ARBvEyZoMbdiwDFPN1.qP905dRASRag7PZyZygIFy6pi76IUBW','051123231','Subiceva 1',1);
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
@@ -140,9 +140,9 @@ INSERT INTO `prodajalec` VALUES
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
-(1, 'DVD', 'Opis artikla', 3.99, 1),
-(2, 'Bluray', 'Opis artikla', 5.99, 1),
-(3, 'CD', 'Opis artikla', 2.99, 1);
+(1, 'iZombie season 1 DVD', 'Opis artikla', 3.99, 1),
+(2, 'Planet Earth Bluray', 'Opis artikla', 5.99, 1),
+(3, 'Westworld season1 Bluray', 'Opis artikla', 7.99, 1);
 
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
@@ -153,7 +153,7 @@ INSERT INTO `artikel` VALUES
 LOCK TABLES `artikel` WRITE;
 INSERT INTO `artikel` VALUES
 (7, 'iPhone X', 'Opis artikla', 999.99, 1),
-(8, 'iPhone 8 Plus', 'Opis artikla', 799.99, 0),
+(8, 'iPhone 8 Plus', 'Opis artikla', 799.99, 1),
 (9, 'iPhone 8', 'Opis artikla', 699.99, 0);
 
 
@@ -161,4 +161,24 @@ LOCK TABLES `narocilo` WRITE;
 INSERT INTO `narocilo` VALUES
 (1, 100.00, 1, false, false),
 (2, 621.00, 1, false, false),
-(3, 0.99, 1, false, false);
+(3, 25.85, 1, false, true),
+(4, 39.43, 2, true, false);
+
+LOCK TABLES `kosarice` WRITE;
+INSERT INTO `kosarice` VALUES
+(4, 2, 1),
+(5, 2, 2),
+(8, 3, 1),
+(9, 3, 2),
+(5, 3, 1);
+
+LOCK TABLES `ocene` WRITE;
+INSERT INTO `ocene` VALUES
+(1, 6, 4),
+(1, 7, 4),
+(3, 7, 3),
+(3, 8, 2),
+(3, 9, 4);
+
+
+
