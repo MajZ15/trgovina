@@ -21,10 +21,10 @@ class NarociloDB extends AbstractDB {
         $x = $id["id"];
         $narocila =  parent::query("SELECT *"
                         . " FROM narocilo"
-                        . " WHERE  idnarocilo = $x");
+                        . " WHERE stranka_idstranka = $x");
         
-         if (count($narocila) == 1) {
-            return $narocila[0];
+         if (count($narocila) > 0) {
+            return $narocila;
         } else {
             throw new InvalidArgumentException("Narocilo ne obstaja!");
         }

@@ -76,10 +76,7 @@ class KosariceRESTController {
         // Vrni kodo 200 v primeru uspeha
         // Vrni kodo 400 v primeru napake
         try {
-            $json = file_get_contents("php://input");
-            $obj = json_decode($json,TRUE);
-            $obj['idstranka'] = $id;
-            KosariceDB::delete($obj);
+            KosariceDB::delete(["id" => $id]);
             echo ViewHelper::renderJSON("",200);
         } catch (Exception $e) {
             echo ViewHelper::renderJSON("Napaka: {$e->getMessage()})",400);

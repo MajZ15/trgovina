@@ -38,10 +38,9 @@ class KosariceDB extends AbstractDB {
                         . " AND idartikel_kosarica = :idartikel", $params);
     }
 
-    public static function delete(array $params) {
+    public static function delete(array $id) {
         return parent::modify("DELETE FROM kosarice"
-                . " WHERE idstranka_kosarica = :idstranka"
-                . " AND idartikel_kosarica = :idartikel",$params);
+                . " WHERE idstranka_kosarica = :id", $id);
     }
     
     
