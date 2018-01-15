@@ -37,7 +37,7 @@ class NarociloDB extends AbstractDB {
     
     public static function update(array $params) {
         return parent::modify("UPDATE narocilo SET"
-                        . "potrjeno = :potrjeno, preklicano = :preklicano"
+                        . " potrjeno = :potrjeno, preklicano = :preklicano"
                         . " WHERE idnarocilo = :id", $params);
     }
 
