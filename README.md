@@ -1,6 +1,6 @@
 # EP Trgovina Backend
 
-PHP backend for an online store. Build for a project for the Electronic Business course. 
+PHP backend for an online store. Created as an end project for the Electronic Business course. 
 
 ## Prerequisites
 
